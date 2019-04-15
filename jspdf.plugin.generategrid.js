@@ -1,6 +1,6 @@
 /** @preserve 
 jsPDF Generate Grid plugin
-Copyright (c) 2019 John Attebury @attebury
+Copyright (c) 2019 John Attebury https://github.com/attebury/jsPDF-GenerateGrid/blob/master/jspdf.plugin.generategrid.js
 MIT license.
 */
 /**
