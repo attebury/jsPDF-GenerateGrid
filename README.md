@@ -16,7 +16,7 @@ doc = new jsPDF({ format: 'letter' });
 
 myGrid = doc.generateGrid({ columns: 12, pageMargin: 5, columnMargin: 2 });
 
-cols = myGrid.cols;
+col = myGrid.cols;
 ````
 ### Alignment
 ````
