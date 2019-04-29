@@ -4,8 +4,8 @@ Use a basic grid to align text in jsPDF created documents.
 
 Returns an object of page coordinates.
 
-- aWidth: available width
-- aHeight: available height
+- aWidth: available width (the width of the page minus the page margins)
+- aHeight: available height (the height of the page minus the page margins)
 - hCenter: horizontal center
 - vCenter: vertical center
 - cols: array of column objects with the start (x), center (xc), and end (xe) of each column. Use those coordinates to align text as needed.
