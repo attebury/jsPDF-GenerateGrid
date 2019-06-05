@@ -1,8 +1,9 @@
 /** @preserve 
-jsPDF Generate Grid plugin
-Copyright (c) 2019 John Attebury https://github.com/attebury/jsPDF-GenerateGrid/blob/master/jspdf.plugin.generategrid.js
-MIT license.
-*/
+ * jsPDF Generate Grid plugin
+ * Copyright (c) 2019 Stocker1 Innovations 
+ * @author John Attebury @attebury
+ * MIT license.
+ * */
 /**
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -28,10 +29,12 @@ MIT license.
 'use strict'
 
 /**
-Returns an object of page dimensions
-
-@function
-@returns {Object}
+ * Returns an object of page dimensions
+ *
+ * @function
+ * 
+ * 
+ * @returns {Object}
 */
 var getPageDimensions = API.getPageDimensions = function(that) {
     var width
@@ -54,15 +57,17 @@ var getPageDimensions = API.getPageDimensions = function(that) {
 }
 
 /**
-Calculate columns used for the grid
-
-@function
-@param {number} pageMargin
-@param {number} columns
-@param {number} gutterWidth
-@param columnWidth
-@returns {Array} cols -
-*/
+ * Calculate column coordinates used for the grid
+ *
+ * @function
+ * 
+ * @param {number} pageMargin
+ * @param {number} columns
+ * @param {number} gutterWidth
+ * @param columnWidth
+ * 
+ * @returns {Array} cols 
+ * */
 var setPageColumns = API.setPageColumns = function(pageMargin, columns, gutterWidth, columnWidth) {
     var xPos
     , cNumber
@@ -101,37 +106,44 @@ var setPageColumns = API.setPageColumns = function(pageMargin, columns, gutterWi
 }
 
 /**
-Returns an object of coordinates for grid
-
-@public
-@function
-@param {object} options 
-@param {number} options.pageMargin - where to stop and stop the page
-@param {number} options.columns - the number of columns in the grid
-@param {number} [options.gutterWidth] - optional - specify the width between columns 
-@param {number} options.columnMargin 
-@returns {Object} grid
-*/
+ * Returns an object of coordinates for grid
+ * 
+ * @function
+ * 
+ * @param {object} options
+ * @param {number} options.pageMargin where to stop and stop the page
+ * @param {number} options.columns the number of columns in the grid
+ * @param {number} [options.gutterWidth] optional - specify the width between columns
+ * @param {number} options.columnMargin margin between columns
+ * 
+ * @returns {Object} grid
+ * 
+ * */
     var generateGrid = API.generateGrid = function (options) {
         'use strict'
 
-        var gWidth
+        var availablePageHeight
+            , availablePageWidth
+            , cols
+            , colsLength
+            , colsLast
+            , columnMargin
+            , columns
+            , columnWidth
+            , grid
+            , gutterWidth
+            , gWidth
+            , centerHoriztonal
+            , centerVertical
             , numberOfGutters
             , pageDimensions
+            , pageMargin
             , pageWidth
             , pageHeight
-            , horizontalCenter
-            , verticalCenter
-            , availablePageWidth
-            , availablePageHeight
-            , columnWidth
             , xPos
-            , cols
-            , grid
-            , columns
-            , pageMargin
-            , columnMargin
-            , gutterWidth;
+            , xCenter
+            , xLeft
+            , xRight;
 
         columns = options.columns;
         pageMargin = options.pageMargin;
@@ -148,8 +160,8 @@ Returns an object of coordinates for grid
 
         pageWidth = pageDimensions.w;
         pageHeight = pageDimensions.h;   
-        horizontalCenter = pageDimensions.hc;
-        verticalCenter = pageDimensions.vc;
+        centerHoriztonal = pageDimensions.hc;
+        centerVertical = pageDimensions.vc;
 
         availablePageWidth = pageWidth - (pageMargin * 2);
         availablePageHeight = pageHeight - (pageMargin * 2);        
@@ -159,13 +171,24 @@ Returns an object of coordinates for grid
         columnWidth = (availablePageWidth - (gWidth * numberOfGutters)) / columns;
 
         cols = setPageColumns(pageMargin, columns, gWidth, columnWidth);
+        colsLength = cols.length;
+        colsLast = colsLength - 1;
+
+        xLeft = cols[0].x;
+        xRight = cols[colsLast].xe;
+        
 
         grid = {
             aWidth: availablePageWidth
             , aHeight: availablePageHeight
-            , hCenter: horizontalCenter
-            , vCenter: verticalCenter
+            , hCenter: centerHoriztonal
+            , vCenter: centerVertical
             , cols: cols
+            , pageMargin: pageMargin
+            , pageHeight: pageHeight
+            , pageWidth: pageWidth
+            , xLeft: xLeft
+            , xRight: xRight
         }
 
         return grid;
