@@ -1,6 +1,5 @@
 /** @preserve 
  * jsPDF Generate Grid plugin
- * Copyright (c) 2019 Stocker1 Innovations 
  * @author John Attebury @attebury
  * MIT license.
  * */
